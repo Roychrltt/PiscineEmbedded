@@ -6,6 +6,7 @@ OBJCOPY = avr-objcopy
 AVRDUDE = avrdude
 PROGRAMMER = arduino
 PORT = /dev/ttyUSB0
+BAUDRATE = 115200
 
 CFLAGS = -Wall -Os -DF_CPU=$(F_CPU) -mmcu=$(MCU)
 
@@ -23,7 +24,7 @@ hex: $(OBJ)
 	$(OBJCOPY) -O ihex -R .eeprom $(NAME).bin $(NAME).hex
 
 flash: hex
-	$(AVRDUDE) -c $(PROGRAMMER) -p $(MCU) -P $(PORT) -U flash:w:$(NAME).hex:i
+	$(AVRDUDE) -c $(PROGRAMMER) -p $(MCU) -P $(PORT) -b ${BAUDRATE} -U flash:w:$(NAME).hex:i
 
 clean:
 	rm -f $(OBJ) $(NAME).bin $(NAME).hex

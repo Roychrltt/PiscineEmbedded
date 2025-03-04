@@ -3,6 +3,7 @@
 
 void	init_io(uint8_t value)
 {
+	// datasheet, p.85
 	DDRB |= 0x17;
 	PORTB = value;
 	DDRD &= ~((1 << PD2) | (1 << PD4));
@@ -11,6 +12,7 @@ void	init_io(uint8_t value)
 
 uint8_t debounce(uint8_t pin)
 {
+	// datasheet, p.84
 	if (!(PIND & (1 << pin)))
 	{
 		_delay_ms(50);
